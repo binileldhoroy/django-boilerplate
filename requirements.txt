@@ -1,0 +1,37 @@
+# Django
+Django>=5.0,<5.1
+django-environ>=0.11.2
+
+# Database
+psycopg2-binary>=2.9.9
+
+# API
+djangorestframework>=3.15.1
+djangorestframework-simplejwt>=5.3.1
+drf-spectacular>=0.27.2
+
+# Authentication
+django-allauth>=0.63.3
+dj-rest-auth>=6.0.0
+
+# CORS
+django-cors-headers>=4.3.1
+
+# Celery
+celery[redis]>=5.4.0
+django-celery-beat>=2.6.0
+celery-progress>=0.3
+redis>=5.0.4
+
+# Health checks
+django-health-check>=3.18.2
+
+# Utilities
+python-dotenv>=1.0.1
+gunicorn>=22.0.0
+
+# Sentry (optional)
+sentry-sdk>=2.3.1
+
+# Development
+django-debug-toolbar>=4.2.0

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Home - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome to {{ project_name }}</h1>
+    <p>This is a Django boilerplate project.</p>
+    
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.email }}!</p>
+    {% else %}
+        <p>Please <a href="{% url 'account_login' %}">login</a> or <a href="{% url 'account_signup' %}">sign up</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}
