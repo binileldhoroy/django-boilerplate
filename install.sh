@@ -67,7 +67,7 @@ echo ""
 
 # Project name
 while true; do
-    read -p "Enter your project name (e.g., my_awesome_app): " PROJECT_NAME
+    read -p "Enter your project name (e.g., my_awesome_app): " PROJECT_NAME </dev/tty
     
     # Validate project name
     if [[ -z "$PROJECT_NAME" ]]; then
@@ -88,13 +88,13 @@ while true; do
 done
 
 # Project description
-read -p "Enter project description (optional, press Enter to skip): " PROJECT_DESCRIPTION
+read -p "Enter project description (optional, press Enter to skip): " PROJECT_DESCRIPTION </dev/tty
 if [[ -z "$PROJECT_DESCRIPTION" ]]; then
     PROJECT_DESCRIPTION="A Django project built with Django Boilerplate"
 fi
 
 # Target directory
-read -p "Enter target directory (default: ./$PROJECT_NAME): " TARGET_DIR
+read -p "Enter target directory (default: ./$PROJECT_NAME): " TARGET_DIR </dev/tty
 if [[ -z "$TARGET_DIR" ]]; then
     TARGET_DIR="./$PROJECT_NAME"
 fi
@@ -102,7 +102,7 @@ fi
 # Check if directory exists
 if [[ -d "$TARGET_DIR" ]]; then
     print_warning "Directory $TARGET_DIR already exists!"
-    read -p "Do you want to remove it and continue? (yes/no): " REMOVE_DIR
+    read -p "Do you want to remove it and continue? (yes/no): " REMOVE_DIR </dev/tty
     if [[ "$REMOVE_DIR" == "yes" ]]; then
         rm -rf "$TARGET_DIR"
         print_info "Removed existing directory"
@@ -218,7 +218,7 @@ print_success "Git repository initialized!"
 
 # Ask about virtual environment
 echo ""
-read -p "Do you want to create a virtual environment? (yes/no): " CREATE_VENV
+read -p "Do you want to create a virtual environment? (yes/no): " CREATE_VENV </dev/tty
 
 if [[ "$CREATE_VENV" == "yes" ]]; then
     print_info "Creating virtual environment..."
@@ -226,7 +226,7 @@ if [[ "$CREATE_VENV" == "yes" ]]; then
     print_success "Virtual environment created!"
     
     # Ask about installing dependencies
-    read -p "Do you want to install dependencies? (yes/no): " INSTALL_DEPS
+    read -p "Do you want to install dependencies? (yes/no): " INSTALL_DEPS </dev/tty
     
     if [[ "$INSTALL_DEPS" == "yes" ]]; then
         print_info "Installing dependencies... (this may take a few minutes)"
@@ -239,7 +239,7 @@ if [[ "$CREATE_VENV" == "yes" ]]; then
         print_success "Dependencies installed!"
         
         # Ask about running migrations
-        read -p "Do you want to run database migrations? (yes/no): " RUN_MIGRATIONS
+        read -p "Do you want to run database migrations? (yes/no): " RUN_MIGRATIONS </dev/tty
         
         if [[ "$RUN_MIGRATIONS" == "yes" ]]; then
             print_info "Running migrations..."
@@ -247,7 +247,7 @@ if [[ "$CREATE_VENV" == "yes" ]]; then
             print_success "Migrations completed!"
             
             # Ask about creating superuser
-            read -p "Do you want to create a superuser? (yes/no): " CREATE_SUPERUSER
+            read -p "Do you want to create a superuser? (yes/no): " CREATE_SUPERUSER </dev/tty
             
             if [[ "$CREATE_SUPERUSER" == "yes" ]]; then
                 echo ""
