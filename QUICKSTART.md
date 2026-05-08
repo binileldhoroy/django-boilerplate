@@ -8,14 +8,10 @@ Get your Django project up and running in 5 minutes!
 - PostgreSQL (or use SQLite for development)
 - Redis (optional, for Celery)
 
-## Option 1: Automated Setup (Recommended) ⚡
+## Option 1: One-Command Install (Recommended) ⚡
 
 ```bash
-# Navigate to the boilerplate directory
-cd /path/to/django-boilerplate
-
-# Run the setup script
-./create_django_project.sh
+curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
 
 # Follow the prompts:
 # - Enter project name: my_awesome_app
@@ -37,10 +33,9 @@ Visit: http://localhost:8000
 ## Option 2: Manual Setup 🛠️
 
 ```bash
-# 1. Copy the boilerplate
-cp -r django-boilerplate my_project
+# 1. Clone the boilerplate
+git clone https://github.com/binileldhoroy/django-boilerplate.git my_project
 cd my_project
-rm create_django_project.sh
 
 # 2. Find and replace placeholders
 # Replace {{ project_name }} with your project name
@@ -76,8 +71,8 @@ Visit: http://localhost:8000
 ## Option 3: Docker Setup 🐳
 
 ```bash
-# 1. Copy the boilerplate
-cp -r django-boilerplate my_project
+# 1. Clone the boilerplate
+git clone https://github.com/binileldhoroy/django-boilerplate.git my_project
 cd my_project
 
 # 2. Update docker-compose.yml
@@ -231,7 +226,7 @@ python manage.py collectstatic
 
 - 📖 Read `README.md` for detailed documentation
 - 📚 Check `BOILERPLATE_USAGE.md` for usage guide
-- 🔍 Review `BOILERPLATE_SUMMARY.md` for overview
+- 🔍 Review `PROJECT_STRUCTURE.md` for overview
 - 🐛 Check Django documentation: https://docs.djangoproject.com/
 
 ## Tips

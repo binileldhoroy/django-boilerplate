@@ -2,17 +2,15 @@
 
 A production-ready Django boilerplate with modern best practices and **one-command installation**.
 
-## 🚀 Quick Start
+## Quick Start
 
 Install and set up a new Django project with a single command:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
 ```
 
-That's it! The installer will guide you through the setup process.
-
-**Note**: Replace `YOUR_USERNAME/YOUR_REPO` with your actual GitHub repository details. See [GITHUB_SETUP.md](GITHUB_SETUP.md) for instructions.
+The installer will guide you through the setup interactively — project name, description, virtual environment, dependencies, migrations, and superuser creation.
 
 ## Features
 
@@ -26,20 +24,21 @@ That's it! The installer will guide you through the setup process.
 - **Docker** - Containerized development and deployment
 - **Environment-based configuration** - Secure settings management
 
-## Quick Start
-
-### Prerequisites
+## Prerequisites
 
 - Python 3.12+
-- PostgreSQL 15+
-- Redis 7+
+- Git
+- PostgreSQL 15+ (optional, SQLite works for development)
+- Redis 7+ (optional, for Celery)
 
-### Installation
+## Manual Installation
+
+If you prefer to set up manually:
 
 1. **Clone the repository**
 ```bash
-git clone <repository-url>
-cd {{ project_name }}
+git clone https://github.com/binileldhoroy/django-boilerplate.git my_project
+cd my_project
 ```
 
 2. **Create virtual environment**
@@ -78,20 +77,9 @@ Visit http://localhost:8000
 
 ## Docker Setup
 
-### Using Docker Compose
-
-1. **Build and start services**
 ```bash
 docker-compose up --build
-```
-
-2. **Run migrations**
-```bash
 docker-compose exec web python manage.py migrate
-```
-
-3. **Create superuser**
-```bash
 docker-compose exec web python manage.py createsuperuser
 ```
 
@@ -100,7 +88,7 @@ Visit http://localhost:8000
 ## Project Structure
 
 ```
-{{ project_name }}/
+my_project/
 ├── config/                 # Project configuration
 │   ├── settings.py        # Django settings
 │   ├── urls.py            # URL configuration
@@ -132,7 +120,6 @@ Key environment variables (see `.env.example` for full list):
 
 ## API Documentation
 
-API documentation is available at:
 - Swagger UI: http://localhost:8000/api/schema/swagger-ui/
 - ReDoc: http://localhost:8000/api/schema/redoc/
 
@@ -144,21 +131,17 @@ python manage.py test
 
 ## Celery Tasks
 
-Start Celery worker:
 ```bash
+# Start worker
 celery -A config worker -l info
-```
 
-Start Celery beat (for scheduled tasks):
-```bash
+# Start beat (scheduled tasks)
 celery -A config beat -l info
 ```
 
-## Deployment
+## Production Checklist
 
-### Production Checklist
-
-1. Set `DEBUG=False` in environment
+1. Set `DEBUG=False`
 2. Configure `ALLOWED_HOSTS`
 3. Set strong `SECRET_KEY` and `SIMPLE_JWT_SIGNING_KEY`
 4. Configure production database
@@ -167,8 +150,6 @@ celery -A config beat -l info
 7. Enable HTTPS (`USE_HTTPS_IN_ABSOLUTE_URLS=True`)
 8. Set up Sentry for error tracking
 9. Configure backup strategy
-
-### Using Gunicorn
 
 ```bash
 gunicorn config.wsgi:application --bind 0.0.0.0:8000
@@ -180,6 +161,8 @@ gunicorn config.wsgi:application --bind 0.0.0.0:8000
 2. Create a feature branch
 3. Make your changes
 4. Submit a pull request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## License
 

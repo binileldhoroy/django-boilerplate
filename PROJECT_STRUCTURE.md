@@ -48,7 +48,7 @@ django-boilerplate/
 │
 ├── 🚀 Installation Scripts
 │   ├── install.sh                      # ⭐ ONE-COMMAND INSTALLER
-│   └── create_django_project.sh        # Interactive setup script
+│   └── create_django_project.sh        # Local setup script (alternative to install.sh)
 │
 ├── 🐳 Docker Configuration
 │   ├── Dockerfile                      # Docker image configuration
@@ -387,8 +387,11 @@ ls *.sh
 
 ---
 
-**Location:** `/home/binil/Desktop/django-boilerplate/`
+**Repository:** `https://github.com/binileldhoroy/django-boilerplate`
 
-**Next Step:** See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) to upload to GitHub!
+**Install command:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
+```
 
 🚀 **Happy coding!**

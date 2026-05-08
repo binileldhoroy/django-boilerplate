@@ -5,10 +5,9 @@
 Install and set up a new Django project with a single command:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
 ```
 
-**Replace `YOUR_USERNAME/YOUR_REPO` with your actual GitHub repository details.**
 
 ### What This Does
 
@@ -29,7 +28,7 @@ The installation script will:
 
 ```bash
 # Run the installer
-curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
 
 # Follow the prompts:
 # Enter your project name: my_blog
@@ -51,30 +50,26 @@ python manage.py runserver
 ### Method 1: Using Git Clone
 
 ```bash
-# Clone the repository
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git my_project
+git clone https://github.com/binileldhoroy/django-boilerplate.git my_project
 cd my_project
-
-# Run the setup script
-./create_django_project.sh
+bash install.sh
 ```
 
 ### Method 2: Download ZIP
 
 1. Download the repository as ZIP from GitHub
 2. Extract to your desired location
-3. Navigate to the directory
-4. Run the setup script:
+3. Navigate to the directory and run:
    ```bash
    cd django-boilerplate
-   ./create_django_project.sh
+   bash install.sh
    ```
 
 ### Method 3: Manual Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git my_project
+git clone https://github.com/binileldhoroy/django-boilerplate.git my_project
 cd my_project
 
 # Remove git history
@@ -130,7 +125,7 @@ sudo apt update
 sudo apt install python3.12 python3.12-venv python3-pip git postgresql redis-server
 
 # Run the installer
-curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
 ```
 
 ### macOS
@@ -140,7 +135,7 @@ curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/install
 brew install python@3.12 git postgresql redis
 
 # Run the installer
-curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
 ```
 
 ### Windows
@@ -152,7 +147,7 @@ curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/install
 # 3. Download and install PostgreSQL from postgresql.org
 
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git my_project
+git clone https://github.com/binileldhoroy/django-boilerplate.git my_project
 cd my_project
 
 # Create virtual environment
@@ -179,7 +174,7 @@ python manage.py runserver
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git my_project
+git clone https://github.com/binileldhoroy/django-boilerplate.git my_project
 cd my_project
 
 # Update docker-compose.yml (replace {{ project_name }})
@@ -265,9 +260,9 @@ chmod +x install.sh
 2. Verify the repository URL is correct
 3. If private repo, use git clone with authentication:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-   cd YOUR_REPO
-   ./create_django_project.sh
+   git clone https://github.com/binileldhoroy/django-boilerplate.git
+   cd django-boilerplate
+   bash install.sh
    ```
 
 ### Database connection errors

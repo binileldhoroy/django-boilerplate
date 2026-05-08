@@ -4,17 +4,13 @@ This guide explains how to use this Django boilerplate to create new projects.
 
 ## Quick Start
 
-### Method 1: Using the Setup Script (Recommended)
+### Method 1: One-Command Installer (Recommended)
 
 ```bash
-# Navigate to the boilerplate directory
-cd /path/to/django-boilerplate
-
-# Run the setup script
-./create_django_project.sh
+curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
 ```
 
-The script will:
+The installer will:
 1. Prompt for project name and description
 2. Copy all boilerplate files to a new directory
 3. Replace all placeholders with your project name
@@ -26,12 +22,9 @@ The script will:
 ### Method 2: Manual Setup
 
 ```bash
-# Copy the boilerplate
-cp -r django-boilerplate my_new_project
+# Clone the boilerplate
+git clone https://github.com/binileldhoroy/django-boilerplate.git my_new_project
 cd my_new_project
-
-# Remove the setup script
-rm create_django_project.sh
 
 # Manually replace placeholders
 # Find and replace {{ project_name }} with your project name

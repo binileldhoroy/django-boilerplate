@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Django Boilerplate - One-Command Installer
-# Usage: curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
 
 set -e  # Exit on error
 
@@ -113,7 +113,7 @@ if [[ -d "$TARGET_DIR" ]]; then
 fi
 
 # GitHub repository URL
-REPO_URL="https://github.com/YOUR_USERNAME/YOUR_REPO.git"  # Update this with your repo URL
+REPO_URL="https://github.com/binileldhoroy/django-boilerplate.git"
 TEMP_DIR=$(mktemp -d)
 
 print_info "Downloading Django boilerplate..."

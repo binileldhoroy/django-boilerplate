@@ -1,206 +1,55 @@
 # Deployment Guide - GitHub & One-Command Installation
 
-## 📋 Overview
+## Overview
 
-This guide provides step-by-step instructions to:
-1. Upload the Django boilerplate to GitHub (private repository)
-2. Configure one-command installation
-3. Share with users
+This guide explains how the one-command installer works and how to share it.
 
-## 🎯 Your Use Case
+The repository is hosted at: `https://github.com/binileldhoroy/django-boilerplate`
 
-You want to:
-- ✅ Keep the boilerplate in a **private GitHub repository**
-- ✅ Provide a **single command** for users to download and set up projects
-- ✅ Users run one command → project is created on their local machine
+## One-Command Installation
 
-## 🚀 Quick Setup (5 Minutes)
-
-### Step 1: Create GitHub Repository
-
-1. Go to https://github.com/new
-2. Repository name: `django-boilerplate`
-3. Visibility: **Private** ✅
-4. Click "Create repository"
-
-### Step 2: Update install.sh
-
-Open `install.sh` and update line 107:
+Anyone can install a new Django project with:
 
 ```bash
-# Change this:
-REPO_URL="https://github.com/YOUR_USERNAME/YOUR_REPO.git"
-
-# To your actual repository:
-REPO_URL="https://github.com/yourusername/django-boilerplate.git"
+curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
 ```
 
-### Step 3: Push to GitHub
+The installer will:
+1. Check prerequisites (Git, Python 3.12+)
+2. Prompt for project name and description
+3. Clone the boilerplate and copy files to the target directory
+4. Replace all placeholders automatically
+5. Generate secure secret keys
+6. Create `.env` file
+7. Initialize a Git repository
+8. Optionally create virtual environment, install dependencies, run migrations, create superuser
 
-```bash
-cd /home/binil/Desktop/django-boilerplate
+## How It Works
 
-# Initialize git
-git init
-git add .
-git commit -m "Initial commit: Django boilerplate"
-
-# Add remote (replace with your URL)
-git remote add origin https://github.com/yourusername/django-boilerplate.git
-
-# Push
-git branch -M main
-git push -u origin main
+```
+User runs curl command
+        ↓
+install.sh downloads and executes
+        ↓
+Prompts user for project details (reads from /dev/tty)
+        ↓
+Clones https://github.com/binileldhoroy/django-boilerplate.git
+        ↓
+Copies files to target directory
+        ↓
+Replaces {{ project_name }} placeholders
+        ↓
+Generates SECRET_KEY and JWT_SIGNING_KEY
+        ↓
+Project is ready
 ```
 
-### Step 4: Create Personal Access Token
+## Updating the Boilerplate
 
-Since your repository is private, create a token:
-
-1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
-2. Click "Generate new token (classic)"
-3. Name: "Django Boilerplate Installer"
-4. Select scope: `repo` (Full control of private repositories)
-5. Click "Generate token"
-6. **Copy the token** (starts with `ghp_...`)
-
-### Step 5: Share with Users
-
-Provide this command to your users:
+When you make changes to the boilerplate:
 
 ```bash
-curl -sSL https://YOUR_TOKEN@raw.githubusercontent.com/yourusername/django-boilerplate/main/install.sh | bash
-```
-
-Replace:
-- `YOUR_TOKEN` with the token you created
-- `yourusername` with your GitHub username
-
-## 📝 Example
-
-If your GitHub username is `binil` and your token is `ghp_abc123xyz`:
-
-```bash
-curl -sSL https://ghp_abc123xyz@raw.githubusercontent.com/binil/django-boilerplate/main/install.sh | bash
-```
-
-## 🔒 Security Considerations
-
-### Option 1: Embed Token in Command (Simple)
-
-**Pros:**
-- ✅ One command for users
-- ✅ No additional setup needed
-
-**Cons:**
-- ⚠️ Token is visible in the command
-- ⚠️ Anyone with the command can access your repository
-
-**Best for:** Small teams, trusted users
-
-### Option 2: Users Provide Their Own Credentials
-
-Update `install.sh` to prompt for credentials:
-
-```bash
-# Add after line 90 in install.sh:
-echo ""
-print_info "This repository is private. Please provide your GitHub credentials."
-read -p "GitHub username: " GITHUB_USER
-read -sp "GitHub token: " GITHUB_TOKEN
-echo ""
-
-REPO_URL="https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/yourusername/django-boilerplate.git"
-```
-
-Then users run:
-```bash
-curl -sSL https://raw.githubusercontent.com/yourusername/django-boilerplate/main/install.sh | bash
-```
-
-**Pros:**
-- ✅ More secure
-- ✅ Each user uses their own credentials
-
-**Cons:**
-- ⚠️ Users need GitHub access
-- ⚠️ More setup for users
-
-**Best for:** Larger teams, organization-wide use
-
-### Option 3: Git Clone Method
-
-Users clone the repository directly:
-
-```bash
-# User clones with their credentials
-git clone https://github.com/yourusername/django-boilerplate.git my_project
-cd my_project
-./create_django_project.sh
-```
-
-**Pros:**
-- ✅ Standard Git workflow
-- ✅ Users manage their own authentication
-
-**Cons:**
-- ⚠️ Not a single command
-- ⚠️ Users need Git knowledge
-
-**Best for:** Developer teams
-
-## 📦 Complete Workflow Example
-
-### For Repository Owner (You)
-
-```bash
-# 1. Navigate to boilerplate
-cd /home/binil/Desktop/django-boilerplate
-
-# 2. Update install.sh with your repository URL
-nano install.sh  # Update line 107
-
-# 3. Initialize and push to GitHub
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/yourusername/django-boilerplate.git
-git push -u origin main
-
-# 4. Create Personal Access Token on GitHub
-# (Follow Step 4 above)
-
-# 5. Share command with users
-echo "curl -sSL https://YOUR_TOKEN@raw.githubusercontent.com/yourusername/django-boilerplate/main/install.sh | bash"
-```
-
-### For End Users
-
-```bash
-# User receives this command from you
-curl -sSL https://YOUR_TOKEN@raw.githubusercontent.com/yourusername/django-boilerplate/main/install.sh | bash
-
-# Installer prompts:
-# Enter your project name: my_blog
-# Enter project description: A personal blog
-# Enter target directory: ./my_blog
-# Create virtual environment? yes
-# Install dependencies? yes
-# Run migrations? yes
-# Create superuser? yes
-
-# Done! Project is ready
-cd my_blog
-source venv/bin/activate
-python manage.py runserver
-```
-
-## 🔄 Updating the Boilerplate
-
-When you make changes:
-
-```bash
-cd /home/binil/Desktop/django-boilerplate
+cd ~/Documents/django-boilerplate
 
 # Make your changes
 # ... edit files ...
@@ -210,99 +59,82 @@ git add .
 git commit -m "Update: description of changes"
 git push
 
-# Users will automatically get the latest version
+# Users will automatically get the latest version next time they run the installer
 ```
 
-## 📊 Comparison of Methods
+## For Private Repository
 
-| Method | Security | Ease of Use | Best For |
-|--------|----------|-------------|----------|
-| **Embedded Token** | ⚠️ Medium | ✅ Very Easy | Small teams |
-| **User Credentials** | ✅ High | ⚠️ Medium | Large teams |
-| **Git Clone** | ✅ High | ⚠️ Medium | Developers |
+If you switch the repository to private, users will need authentication.
 
-## 🎯 Recommended Approach
+### Option 1: Personal Access Token embedded in command
 
-For your use case (private repo, single command), I recommend:
-
-### Approach A: For Small Team (2-10 people)
-
-Use embedded token method:
+1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+2. Generate a token with `repo` scope
+3. Share this command with your users:
 
 ```bash
-# Share this with your team
-curl -sSL https://YOUR_TOKEN@raw.githubusercontent.com/yourusername/django-boilerplate/main/install.sh | bash
+curl -fsSL https://YOUR_TOKEN@raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
 ```
 
-**Setup time:** 5 minutes  
-**User experience:** Excellent (one command)  
-**Security:** Good (token has limited scope)
+### Option 2: Users provide their own credentials
 
-### Approach B: For Larger Team (10+ people)
+Update `install.sh` to prompt for credentials before cloning:
 
-Modify `install.sh` to prompt for credentials:
+```bash
+print_info "This repository is private. Please provide your GitHub credentials."
+read -p "GitHub username: " GITHUB_USER </dev/tty
+read -sp "GitHub token: " GITHUB_TOKEN </dev/tty
+echo ""
 
-1. Update `install.sh` (see Option 2 above)
-2. Give team members repository access
-3. Share the command (without token)
+REPO_URL="https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/binileldhoroy/django-boilerplate.git"
+```
 
-**Setup time:** 10 minutes  
-**User experience:** Good (one command + credentials)  
-**Security:** Excellent (each user uses own credentials)
+### Option 3: Git Clone Method
 
-## 🛠️ Troubleshooting
+Users clone the repository directly:
+
+```bash
+git clone https://github.com/binileldhoroy/django-boilerplate.git my_project
+cd my_project
+bash install.sh
+```
+
+## Troubleshooting
 
 ### "Failed to download boilerplate"
 
-**Solution 1:** Check token has `repo` scope  
-**Solution 2:** Verify repository URL is correct  
-**Solution 3:** Test token:
-```bash
-curl -H "Authorization: token YOUR_TOKEN" https://api.github.com/user
-```
+- Check internet connection
+- Verify the repository is public (or token has `repo` scope if private)
+- Test access: `curl -I https://github.com/binileldhoroy/django-boilerplate`
 
 ### "Permission denied"
 
-**Solution:** User needs access to the repository  
-Add them as collaborator: Repository Settings → Collaborators → Add people
+For private repos, add the user as a collaborator: Repository Settings → Collaborators → Add people
 
 ### "Token expired"
 
-**Solution:** Generate new token and update the command
+Generate a new Personal Access Token and update the command.
 
-## 📚 Additional Resources
+## Comparison of Methods
 
-- [GITHUB_SETUP.md](GITHUB_SETUP.md) - Detailed GitHub setup
+| Method | Security | Ease of Use | Best For |
+|--------|----------|-------------|----------|
+| **Public repo (current)** | ✅ High | ✅ Very Easy | Open source / teams |
+| **Embedded Token** | ⚠️ Medium | ✅ Very Easy | Small private teams |
+| **User Credentials** | ✅ High | ⚠️ Medium | Large private teams |
+| **Git Clone** | ✅ High | ⚠️ Medium | Developer teams |
+
+## Additional Resources
+
+- [GITHUB_SETUP.md](GITHUB_SETUP.md) - GitHub repository setup
 - [INSTALLATION.md](INSTALLATION.md) - All installation methods
 - [QUICKSTART.md](QUICKSTART.md) - Quick start guide
 - [BOILERPLATE_USAGE.md](BOILERPLATE_USAGE.md) - Usage documentation
 
-## ✅ Checklist
-
-Before sharing with users:
-
-- [ ] Repository created on GitHub (private)
-- [ ] `install.sh` updated with your repository URL
-- [ ] Code pushed to GitHub
-- [ ] Personal Access Token created
-- [ ] Token tested with curl command
-- [ ] Installation command prepared
-- [ ] Documentation updated with your repository details
-- [ ] Tested installation on clean machine
-
-## 🎉 You're Ready!
-
-Your Django boilerplate is now:
-- ✅ Hosted on GitHub (private)
-- ✅ Installable with one command
-- ✅ Ready to share with your team
-
-Share this command with your users:
-
-```bash
-curl -sSL https://YOUR_TOKEN@raw.githubusercontent.com/YOUR_USERNAME/django-boilerplate/main/install.sh | bash
-```
-
 ---
 
-**Need help?** Check [GITHUB_SETUP.md](GITHUB_SETUP.md) for detailed instructions.
+**Share this command with your users:**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
+```

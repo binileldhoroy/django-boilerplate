@@ -331,10 +331,9 @@ All requested deliverables completed:
 
 The Django boilerplate is ready for use!
 
-Location: `/home/binil/Desktop/django-boilerplate/`
+Repository: `https://github.com/binileldhoroy/django-boilerplate`
 
 To create a new project:
 ```bash
-cd /home/binil/Desktop/django-boilerplate
-./create_django_project.sh
+curl -fsSL https://raw.githubusercontent.com/binileldhoroy/django-boilerplate/main/install.sh | bash
 ```

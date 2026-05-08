@@ -1,4 +1,4 @@
-# Contributing to {{ project_name }}
+# Contributing to Django Boilerplate
 
 Thank you for considering contributing to this project!
 
