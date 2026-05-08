@@ -76,7 +76,7 @@ while true; do
     fi
     
     # Convert to lowercase and replace spaces/hyphens with underscores
-    PROJECT_NAME=$(echo "$PROJECT_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '_' | tr '-' '-')
+    PROJECT_NAME=$(echo "$PROJECT_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '_' | tr '-' '_')
     
     # Check if valid Python identifier
     if ! [[ "$PROJECT_NAME" =~ ^[a-z_][a-z0-9_]*$ ]]; then
