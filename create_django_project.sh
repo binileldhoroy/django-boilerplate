@@ -96,7 +96,10 @@ mkdir -p "$TARGET_DIR"
 
 # Copy all files except the setup script itself
 rsync -av --progress "$SCRIPT_DIR/" "$TARGET_DIR/" \
+    --include 'README.md' \
+    --exclude '*.md' \
     --exclude 'create_django_project.sh' \
+    --exclude 'install.sh' \
     --exclude '.git' \
     --exclude '__pycache__' \
     --exclude '*.pyc' \
@@ -116,13 +119,18 @@ print_info "Replacing placeholders..."
 SECRET_KEY=$(generate_secret_key)
 JWT_SIGNING_KEY=$(generate_secret_key)
 
+# Rename config/ to the project name
+if [[ -d "$TARGET_DIR/config" ]]; then
+    mv "$TARGET_DIR/config" "$TARGET_DIR/$PROJECT_NAME"
+fi
+
 # Files to process
 FILES_TO_PROCESS=(
-    "config/settings.py"
-    "config/urls.py"
-    "config/wsgi.py"
-    "config/asgi.py"
-    "config/celery.py"
+    "$PROJECT_NAME/settings.py"
+    "$PROJECT_NAME/urls.py"
+    "$PROJECT_NAME/wsgi.py"
+    "$PROJECT_NAME/asgi.py"
+    "$PROJECT_NAME/celery.py"
     "manage.py"
     ".env.example"
     "docker-compose.yml"

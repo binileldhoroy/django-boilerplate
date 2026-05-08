@@ -97,7 +97,7 @@ MIDDLEWARE = [
 if ENABLE_DEBUG_TOOLBAR:
     MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
-ROOT_URLCONF = "config.urls"
+ROOT_URLCONF = "{{ project_name }}.urls"
 
 # Template configuration
 _DEFAULT_LOADERS = [
@@ -125,7 +125,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "{{ project_name }}.wsgi.application"
 
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 

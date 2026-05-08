@@ -134,8 +134,11 @@ mkdir -p "$TARGET_DIR"
 print_info "Setting up project structure..."
 
 rsync -av --progress "$TEMP_DIR/" "$TARGET_DIR/" \
-    --exclude '.git' \
+    --include 'README.md' \
+    --exclude '*.md' \
     --exclude 'install.sh' \
+    --exclude 'create_django_project.sh' \
+    --exclude '.git' \
     --exclude '__pycache__' \
     --exclude '*.pyc' \
     --exclude 'venv' \
@@ -154,6 +157,11 @@ print_success "Project structure created!"
 # Navigate to project directory
 cd "$TARGET_DIR"
 
+# Rename config/ to the project name so Django module matches project name
+if [[ -d "config" ]]; then
+    mv "config" "$PROJECT_NAME"
+fi
+
 # Replace placeholders
 print_info "Configuring project..."
 
@@ -164,11 +172,11 @@ JWT_SIGNING_KEY=$(python3 -c "from django.core.management.utils import get_rando
 
 # Files to process
 FILES_TO_PROCESS=(
-    "config/settings.py"
-    "config/urls.py"
-    "config/wsgi.py"
-    "config/asgi.py"
-    "config/celery.py"
+    "$PROJECT_NAME/settings.py"
+    "$PROJECT_NAME/urls.py"
+    "$PROJECT_NAME/wsgi.py"
+    "$PROJECT_NAME/asgi.py"
+    "$PROJECT_NAME/celery.py"
     "manage.py"
     ".env.example"
     "docker-compose.yml"
